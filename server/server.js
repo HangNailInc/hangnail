@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const path = require('path');
+
+app.use(express.static('../frontend/dist/app/'));
 
 app.get('/', (req, res) => {
-	res.send('Hello World!');
+	res.sendFile(path.resolve('../frontend/dist/app/index.html'));
 });
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+	console.log(`Hangnail listening on port ${port}`);
 });
