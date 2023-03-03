@@ -1,0 +1,18 @@
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: 1000px;
+}
+
+.grid-item {
+  box-sizing: border-box;
+  display: table-cell;
+  width: .5%;
+  min-width: 1px;
+  height: .5%;
+  min-height: 1px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+}
