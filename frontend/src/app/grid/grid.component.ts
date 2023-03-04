@@ -34,7 +34,7 @@ export class GridComponent {
     //switch to random color
     this.selectedTile.assignRandomColor();
     //set timestamp
-    this.selectedTile.modifiedLast = new Date();
+    this.selectedTile.modifiedLast = new Date().toUTCString();
     //pass click to parent (app.component)
     this.tileClicked.emit(this.selectedTile);
   }
@@ -45,7 +45,7 @@ export class Tile {
 
   x: number;
   y: number;
-  modifiedLast?: Date;
+  modifiedLast?: string;
   color: string;
 
   //TODO: modify to accept color from server
