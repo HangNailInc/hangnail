@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { XyzComponent } from './xyz/xyz.component';
 import { GridComponent } from './grid/grid.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 
@@ -10,13 +12,11 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
   declarations: [
     AppComponent,
     GridComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    XyzComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
