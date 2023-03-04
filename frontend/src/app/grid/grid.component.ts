@@ -10,6 +10,7 @@ import { colors } from '../constants';
 export class GridComponent {
   title = 'grid';
   tiles: Tile[];
+  selectedTile?: Tile;
 
   constructor() {
     this.tiles = [];
@@ -25,7 +26,7 @@ export class GridComponent {
 
   onTileClicked(tile: Tile) {
     console.log('Tile clicked!');
-    tile.setSelected(true);
+    this.selectedTile = tile;
   }
   //need to create list of Tile objects
 
