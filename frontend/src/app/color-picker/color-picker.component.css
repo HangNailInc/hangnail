@@ -21,9 +21,29 @@
     border-color: black;
     border-style: solid;
 }
+
+/* For Skinny Browser */
+@media screen and (min-width: 780px) and (max-width: 900px) {
+    .picker-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 600px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .color-bordered {
+        border-width: 4px;
+        border-color: black;
+        border-style: solid;
+    }
+}
   
 /* For Tablets */
-@media screen and (min-width: 540px) and (max-width: 780px) {
+@media screen and (min-width: 650px) and (max-width: 780px) {
     .picker-container {
         display: flex;
         flex-wrap: wrap;
@@ -37,6 +57,26 @@
 
     .color-bordered {
         border-width: 4px;
+        border-color: black;
+        border-style: solid;
+    }
+}
+
+/* For Skinnier Browser */
+@media screen and (min-width: 540px) and (max-width: 650px) {
+    .picker-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 75px;
+        height: 400px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .color-bordered {
+        border-width: 2px;
         border-color: black;
         border-style: solid;
     }

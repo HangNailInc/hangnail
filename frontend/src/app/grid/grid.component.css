@@ -23,6 +23,63 @@
   border-style: solid;
 }
 
+/* For Skinny Browser */
+@media screen and (min-width: 780px) and (max-width: 900px) {
+  .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 600px;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .tile-bordered {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+/* For Tablets */
+@media screen and (min-width: 650px) and (max-width: 780px) {
+  .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 500px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .tile-bordered {
+    border-width: 4px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+/* For Skinnier Browser */
+@media screen and (min-width: 540px) and (max-width: 650px) {
+  .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .tile-bordered {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
 /* For Mobile */
 @media screen and (max-width: 540px) {
   .grid-container {
@@ -37,25 +94,6 @@
 
   .tile-bordered {
     border-width: 2px;
-    border-color: black;
-    border-style: solid;
-  }
-}
-
-/* For Tablets */
-@media screen and (min-width: 540px) and (max-width: 780px) {
-  .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 500px;
-    height: 500px;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .tile-bordered {
-    border-width: 4px;
     border-color: black;
     border-style: solid;
   }
