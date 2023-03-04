@@ -2,8 +2,9 @@
 
 <!-- grid and color picker -->
 <div class="color-grid-container">
-  <color-picker class="color-picker"></color-picker>
-  <grid class="grid"> </grid>
+  <color-picker class="color-picker" (pickerClicked)="parentPickerClickHandler($event)"></color-picker>
+  <!-- not sure if the modification to the next line is necessary -->
+  <grid class="grid"(tileClicked)="parentTileClickHandler($event)"></grid>
 </div>
 
 <app-xyz/>
