@@ -1,12 +1,11 @@
-namespace Tile {
-  export type Tile = {
-    x: number;
-    y: number;
-    color: string;
-  }
+export default class Tile {
+	constructor(
+		public x: number,
+		public y: number,
+		public color: string,
+		public modified: Date
+	) {}
 }
-
-export default Tile;
 
 /*
 class Tile {
