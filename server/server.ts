@@ -1,15 +1,15 @@
 import express from 'express';
 import { Request } from 'express';
 import path from 'path';
-
-// Import the functions you need from the SDKs you need
+import Tile from '../models/tile';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	Timestamp,
+} from 'firebase/firestore/lite';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
 	apiKey: 'AIzaSyAfZZKLW0tKdhiVEitQYCMazbY5SqIH6Nc',
 	authDomain: 'hangnail-59264.firebaseapp.com',
@@ -20,55 +20,57 @@ const firebaseConfig = {
 	measurementId: 'G-11NBN168Q6',
 };
 
+// Database Logic
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const db = getFirestore(firebase);
 
 // Gets all Pixels from DB
-async function getGrid() {
+async function getTiles() {
 	const pixelsCollection = collection(db, 'pixels');
 	const pixelSnapshot = await getDocs(pixelsCollection);
-	const pixels = pixelSnapshot.docs.map((doc) => doc.data());
+	const pixels: Tile[] = pixelSnapshot.docs.map((doc) => {
+		const data = doc.data();
+		return new Tile(
+			data.x,
+			data.y,
+			data.color,
+			(data.modified as Timestamp).toDate()
+		);
+	});
 	console.log(pixels);
 	return pixels;
 }
 
+async function postTile(tile: Tile) {
+	// TODO: implement database logic for post
+}
+
+// Express API
 const app = express();
 const port = 3000;
 
-import Tile from '../models/tile';
-import Grid from '../models/grid';
-
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	);
-	next();
-});
-
+// Middleware
 app.use(express.json());
-
 app.use(express.static('../frontend/dist/app/'));
 
 app.get('/', (req, res) => {
 	res.sendFile(path.resolve('../frontend/dist/app/index.html'));
 });
 
-app.get('/grid', (req, res) => {
-	console.log('grid');
-	// let k: Grid.Grid = [[{ x: 0, y: 0, color: 'hey' }]];
-	res.send(getGrid());
+// GET all tiles
+app.get('/tiles', async (req, res) => {
+	const tiles = await getTiles();
+	res.send(tiles);
 });
 
-app.post('/place-tile', (req: Request<{}, {}, Tile.Tile>, res) => {
-	console.log('place tile');
-	// console.log(req);
-	console.log(req.body);
+// POST a new/updated tile
+app.post('/tiles/place', (req, res) => {
+	const tile: Tile = req.body;
+	postTile(tile);
 	res.sendStatus(200);
 });
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+	console.log(`Hangnail listening on port ${port}`);
 });
