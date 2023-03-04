@@ -1,8 +1,8 @@
 .picker-container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    height: 1000px;
+    width: 150px;
+    height: 700px;
     padding-top: 10%;
     padding-bottom: 10%;
     padding-right: 5%;
@@ -20,4 +20,44 @@
     border-width: 6px;
     border-color: black;
     border-style: solid;
+}
+  
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    .picker-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 500px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .color-bordered {
+        border-width: 4px;
+        border-color: black;
+        border-style: solid;
+    }
+}
+
+    /* For Mobile */
+@media screen and (max-width: 540px) {
+    .picker-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 65px;
+        height: 300px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+  
+    .color-bordered {
+        border-width: 2px;
+        border-color: black;
+        border-style: solid;
+      }
   }
