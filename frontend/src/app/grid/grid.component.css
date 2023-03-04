@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   width: 1000px;
   height: 1000px;
-  border-width: 1px;
+  border-width: 3px;
   border-color: black;
   border-style: solid;
 }
@@ -15,4 +15,10 @@
   min-width: 1px;
   height: 10%;
   min-height: 1px;
+}
+
+.tile-bordered {
+  border-width: 6px;
+  border-color: black;
+  border-style: solid;
 }

@@ -27,9 +27,9 @@ export class GridComponent {
   onTileClicked(tile: Tile) {
     console.log('Tile clicked!');
     this.selectedTile = tile;
+    tile.changeToRandomColor();
   }
   //need to create list of Tile objects
-
 }
 
 export class Tile {
@@ -60,9 +60,9 @@ export class Tile {
  setModified(s:string) {
   this.modified = s;
  }
- /*
+
  changeToRandomColor() {
   this.color = this.assignRandomColor();
  }
- */
+
 }
