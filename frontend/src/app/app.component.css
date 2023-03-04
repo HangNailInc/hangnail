@@ -1,0 +1,16 @@
+/* Added to components in app.component.html */
+.grid {
+  margin-top: 16px;
+}
+
+.color-picker {
+  width: 15%;
+  height: 100%;
+  margin-top: 16px;
+}
+
+.color-grid-container {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}

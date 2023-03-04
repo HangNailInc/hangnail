@@ -1,0 +1,6 @@
+<div class="picker-container">
+    <div class="color" *ngFor="let color of colors; index as i" [attr.id]="'Color_' + i" [ngStyle]="{'background-color': color}"
+    (click)="onColorClicked(color)" [ngClass]="{'color-bordered': color == selectedColor}">
+
+    </div>
+</div>

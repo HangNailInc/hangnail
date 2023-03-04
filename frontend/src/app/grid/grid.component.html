@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="tile" *ngFor="let tile of tiles" [attr.id]="'Tile(' + tile.x + ',' + tile.y + ')'" [ngStyle]="{'background-color': tile.color}"
+      (click)="onTileClicked(tile)" [ngClass]="{'tile-bordered': tile == selectedTile}">
+      </div>
+    </div>
+  </body>
+</html>
