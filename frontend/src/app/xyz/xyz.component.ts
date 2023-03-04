@@ -9,7 +9,7 @@ import { XyzService } from './xyz.service';
   selector: 'app-xyz',
   templateUrl: './xyz.component.html',
   providers: [XyzService],
-  styleUrls: ['./xyz.component.css'],
+  styleUrls: ['xyz.component.css'],
 })
 export class XyzComponent {
   constructor(private xyzService: XyzService) {}
