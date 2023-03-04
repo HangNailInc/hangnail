@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="grid-container">
-      <div class="grid-item" *ngFor="let item of [].constructor(40000)">
+      <div class="tile" *ngFor="let tile of tiles" [attr.id]="'Tile(' + tile.x + ',' + tile.y + ')'" [ngStyle]="{'background-color': tile.color}" (click)="onTileClicked(tile)">
       </div>
     </div>
   </body>
