@@ -21,4 +21,15 @@ export class XyzComponent {
       this.value = JSON.stringify(tiles);
     });
   }
+
+  postTile(tile: Tile | null): void {
+    // for testing/development only
+    if (tile == null) {
+      tile = new Tile(null, 5, 5, '#ff0000', new Date());
+    }
+
+    this.xyzService.postTile(tile).subscribe((resTile: Tile) => {
+      this.value = 'Posted Tile:\n' + JSON.stringify(resTile);
+    });
+  }
 }

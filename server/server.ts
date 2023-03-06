@@ -8,6 +8,14 @@ import {
 	collection,
 	getDocs,
 	Timestamp,
+	doc,
+	query,
+	where,
+	getDoc,
+	DocumentReference,
+	DocumentData,
+	addDoc,
+	updateDoc,
 } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
@@ -32,6 +40,7 @@ async function getTiles() {
 	const pixels: Tile[] = pixelSnapshot.docs.map((doc) => {
 		const data = doc.data();
 		return new Tile(
+			doc.id,
 			data.x,
 			data.y,
 			data.color,
@@ -42,8 +51,47 @@ async function getTiles() {
 	return pixels;
 }
 
+// async function getTile(x: number, y: number) {
+// 	const tileQuery = query(
+// 		collection(db, 'pixels'),
+// 		where('x', '==', x),
+// 		where('y', '==', y)
+// 	);
+// 	const snapshot = await getDocs(tileQuery);
+
+// 	if (snapshot.empty) {
+// 		return null;
+// 	} else {
+// 		return snapshot.docs[0];
+// 	}
+// }
+
 async function postTile(tile: Tile) {
-	// TODO: implement database logic for post
+	let exists: boolean = false;
+	let tileRef;
+
+	if (tile.id != null) {
+		tileRef = doc(db, 'pixels', tile.id);
+		exists = (await getDoc(tileRef)).exists();
+	}
+
+	if (exists) {
+		await updateDoc(tileRef, {
+			color: tile.color,
+			modified: Timestamp.fromDate(tile.modified),
+		});
+	} else {
+		console.log('Type of tile.modified: ' + typeof tile.modified);
+
+		tileRef = await addDoc(collection(db, 'pixels'), {
+			x: tile.x,
+			y: tile.y,
+			color: tile.color,
+			modified: Timestamp.fromDate(tile.modified),
+		});
+	}
+
+	return new Tile(tileRef.id, tile.x, tile.y, tile.color, tile.modified);
 }
 
 // Express API
@@ -65,10 +113,11 @@ app.get('/tiles', async (req, res) => {
 });
 
 // POST a new/updated tile
-app.post('/tiles/place', (req, res) => {
+app.post('/tiles', async (req, res) => {
 	const tile: Tile = req.body;
-	postTile(tile);
-	res.sendStatus(200);
+	tile.modified = new Date(tile.modified);
+	const resTile = await postTile(tile);
+	res.status(200).send(resTile);
 });
 
 app.listen(port, () => {

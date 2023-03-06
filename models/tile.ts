@@ -1,5 +1,6 @@
 export default class Tile {
 	constructor(
+		public id: string | null,
 		public x: number,
 		public y: number,
 		public color: string,
