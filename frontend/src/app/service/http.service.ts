@@ -10,7 +10,7 @@ import { catchError, retry } from 'rxjs/operators';
 import Tile from '../../../../models/tile';
 
 @Injectable()
-export class XyzService {
+export class HttpService {
   constructor(private http: HttpClient) {}
 
   getTiles(): Observable<Tile[]> {

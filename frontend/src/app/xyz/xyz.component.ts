@@ -3,21 +3,21 @@ import Tile from '../../../../models/tile';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { XyzService } from './xyz.service';
+import { HttpService } from '../service/http.service';
 
 @Component({
   selector: 'app-xyz',
   templateUrl: './xyz.component.html',
-  providers: [XyzService],
+  providers: [HttpService],
   styleUrls: ['xyz.component.css'],
 })
 export class XyzComponent {
-  constructor(private xyzService: XyzService) {}
+  constructor(private httpService: HttpService) {}
 
   value: string = '';
 
   getTiles(): void {
-    this.xyzService.getTiles().subscribe((tiles: Tile[]) => {
+    this.httpService.getTiles().subscribe((tiles: Tile[]) => {
       this.value = JSON.stringify(tiles);
     });
   }
@@ -28,7 +28,7 @@ export class XyzComponent {
       tile = new Tile(null, 5, 5, '#ff0000', new Date());
     }
 
-    this.xyzService.postTile(tile).subscribe((resTile: Tile) => {
+    this.httpService.postTile(tile).subscribe((resTile: Tile) => {
       this.value = 'Posted Tile:\n' + JSON.stringify(resTile);
     });
   }
