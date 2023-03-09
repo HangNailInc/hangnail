@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { colors } from '../constants';
 
 @Component({
@@ -12,6 +12,10 @@ export class GridComponent {
   tiles: Tile[];
   selectedTile?: Tile;
 
+  @Output()
+  tileClicked: EventEmitter<Tile> = new EventEmitter<Tile>();
+
+  //TODO: modify to accept color from server
   constructor() {
     this.tiles = [];
 
@@ -24,45 +28,43 @@ export class GridComponent {
     }
   }
 
-  onTileClicked(tile: Tile) {
-    console.log('Tile clicked!');
-    this.selectedTile = tile;
-    tile.changeToRandomColor();
+  onTileClicked(clickedTile: Tile) {
+    //save selected Tile (so that we can place border around it)
+    this.selectedTile = clickedTile;
+    //switch to random color
+    this.selectedTile.assignRandomColor();
+    //set timestamp
+    this.selectedTile.modifiedLast = new Date().toUTCString();
+    //pass click to parent (app.component)
+    this.tileClicked.emit(this.selectedTile);
   }
-  //need to create list of Tile objects
 }
 
 export class Tile {
   title = 'tile'
+
   x: number;
   y: number;
-  modified: string;
+  modifiedLast?: string;
   color: string;
 
-  selected:boolean;
-
+  //TODO: modify to accept color from server
   constructor(x:number, y:number) { 
     this.x = x;
     this.y = y;
-    this.modified = 'test';
-    this.color = this.assignRandomColor();
-    this.selected = false;
+    this.color = this.getRandomColor();
  }
 
- assignRandomColor() {
+ getRandomColor() {
   return colors[Math.floor(Math.random()* colors.length)];
  }
 
- setSelected(value:boolean) {
-  this.selected = value;
- }
- 
- setModified(s:string) {
-  this.modified = s;
+ assignColor(hex:string) {
+  this.color = hex;
  }
 
- changeToRandomColor() {
-  this.color = this.assignRandomColor();
+ assignRandomColor() {
+  this.color = this.getRandomColor();
  }
 
 }

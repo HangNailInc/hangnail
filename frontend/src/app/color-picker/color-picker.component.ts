@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { colors } from '../constants';
 
 @Component({
@@ -11,8 +11,13 @@ export class ColorPickerComponent {
   colors: string[] = colors;
   selectedColor: string = "NULL";
 
+  @Output()
+  pickerClicked: EventEmitter<string> = new EventEmitter<string>();
+
   onColorClicked(color: string) {
-    console.log('Color clicked!');
+    // save selected Color
     this.selectedColor = color;
+    // pass click to parent (app.component)
+    this.pickerClicked.emit(this.selectedColor);
   }
 }
