@@ -10,7 +10,5 @@ export class TileComponent {
   @Input() tile: Tile = new Tile(null, 0, 0, '#000000', new Date());
   @Input() bordered: boolean = false;
 
-  constructor() {
-    // console.log(this.tile);
-  }
+  constructor() {}
 }

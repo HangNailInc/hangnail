@@ -23,12 +23,6 @@
   min-height: 1px;
 }
 
-.tile-bordered {
-  border-width: 6px;
-  border-color: black;
-  border-style: solid;
-}
-
 /* For Skinny Browser */
 @media screen and (min-width: 780px) and (max-width: 900px) {
   .grid-container {
@@ -36,12 +30,6 @@
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
-    border-width: 3px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .tile-bordered {
     border-width: 3px;
     border-color: black;
     border-style: solid;
@@ -59,12 +47,6 @@
     border-color: black;
     border-style: solid;
   }
-
-  .tile-bordered {
-    border-width: 4px;
-    border-color: black;
-    border-style: solid;
-  }
 }
 
 /* For Skinnier Browser */
@@ -78,12 +60,6 @@
     border-color: black;
     border-style: solid;
   }
-
-  .tile-bordered {
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-  }
 }
 
 /* For Mobile */
@@ -93,12 +69,6 @@
     flex-wrap: wrap;
     width: 300px;
     height: 300px;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .tile-bordered {
     border-width: 2px;
     border-color: black;
     border-style: solid;
