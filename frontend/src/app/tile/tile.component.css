@@ -1,0 +1,49 @@
+.tile {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 1px;
+  height: 100%;
+  min-height: 1px;
+}
+
+.tile-bordered {
+  border-width: 6px;
+  border-color: black;
+  border-style: solid;
+}
+
+/* For Skinny Browser */
+@media screen and (min-width: 780px) and (max-width: 900px) {
+  .tile-bordered {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+/* For Tablets */
+@media screen and (min-width: 650px) and (max-width: 780px) {
+  .tile-bordered {
+    border-width: 4px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+/* For Skinnier Browser */
+@media screen and (min-width: 540px) and (max-width: 650px) {
+  .tile-bordered {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+/* For Mobile */
+@media screen and (max-width: 540px) {
+  .tile-bordered {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+}

@@ -1,3 +1,5 @@
+import { colors } from '../frontend/src/app/constants';
+
 export default class Tile {
 	constructor(
 		public id: string | null,
@@ -6,6 +8,18 @@ export default class Tile {
 		public color: string,
 		public modified: Date
 	) {}
+
+	getRandomColor() {
+		return colors[Math.floor(Math.random() * colors.length)];
+	}
+
+	assignColor(hex: string) {
+		this.color = hex;
+	}
+
+	assignRandomColor() {
+		this.color = this.getRandomColor();
+	}
 }
 
 /*

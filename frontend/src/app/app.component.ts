@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { GridComponent, Tile } from './grid/grid.component';
+import { GridComponent } from './grid/grid.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import Tile from '../../../models/tile';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent implements AfterViewInit {
   title = 'app';
   // declare Components (not sure if we will need)
@@ -23,22 +23,20 @@ export class AppComponent implements AfterViewInit {
     console.log(this.colorPicker);
   }
 
-  parentTileClickHandler(tileClicked: Tile){
+  parentTileClickHandler(tileClicked: Tile) {
     this.selectedTile = tileClicked;
 
-    console.log("Tile Event Passed to App.component");
+    console.log('Tile Event Passed to App.component');
 
     // changes color of tile if color has been selected
-    if(this.selectedColor != null) {
+    if (this.selectedColor != null) {
       this.selectedTile.assignColor(this.selectedColor);
     }
-
   }
 
   parentPickerClickHandler(pickerClicked: string) {
     this.selectedColor = pickerClicked;
 
-    console.log("Picker Event Passed to App.component");
+    console.log('Picker Event Passed to App.component');
   }
-
 }

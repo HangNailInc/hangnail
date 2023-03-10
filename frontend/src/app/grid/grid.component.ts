@@ -1,31 +1,46 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { colors } from '../constants';
+import { HttpService } from '../service/http.service';
+import Tile from '../../../../models/tile';
+import { TileComponent } from '../tile/tile.component';
 
 @Component({
   selector: 'grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+  styleUrls: ['./grid.component.css'],
+  providers: [HttpService],
 })
-
 export class GridComponent {
   title = 'grid';
-  tiles: Tile[];
+  tiles2d: Tile[][] = [];
   selectedTile?: Tile;
+  lastPull: Date;
 
   @Output()
   tileClicked: EventEmitter<Tile> = new EventEmitter<Tile>();
 
   //TODO: modify to accept color from server
-  constructor() {
-    this.tiles = [];
+  constructor(private httpService: HttpService) {
+    // Initialize 10x10 grid
+    this.tiles2d = [...Array(10)].map(() =>
+      [...Array(10)].map(() => new Tile(null, 0, 0, '#00000000', new Date()))
+    );
 
-    let i = 0
-    for (let y = 9; y >= 0; y--) {
-      for (let x = 0; x < 10; x++) {
-        this.tiles[i] = new Tile(x, y)
-        i++;
+    this.httpService.getTiles().subscribe((tiles: Tile[]) => {
+      for (const tile of tiles) {
+        console.log(tile);
+        this.tiles2d[tile.x][tile.y] = tile;
       }
-    }
+      console.log('tiles2d:\n' + JSON.stringify(this.tiles2d));
+    });
+    this.lastPull = new Date();
   }
 
   onTileClicked(clickedTile: Tile) {
@@ -34,37 +49,8 @@ export class GridComponent {
     //switch to random color
     this.selectedTile.assignRandomColor();
     //set timestamp
-    this.selectedTile.modifiedLast = new Date().toUTCString();
+    this.selectedTile.modified = new Date();
     //pass click to parent (app.component)
     this.tileClicked.emit(this.selectedTile);
   }
-}
-
-export class Tile {
-  title = 'tile'
-
-  x: number;
-  y: number;
-  modifiedLast?: string;
-  color: string;
-
-  //TODO: modify to accept color from server
-  constructor(x:number, y:number) { 
-    this.x = x;
-    this.y = y;
-    this.color = this.getRandomColor();
- }
-
- getRandomColor() {
-  return colors[Math.floor(Math.random()* colors.length)];
- }
-
- assignColor(hex:string) {
-  this.color = hex;
- }
-
- assignRandomColor() {
-  this.color = this.getRandomColor();
- }
-
 }

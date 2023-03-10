@@ -1,0 +1,7 @@
+<div
+  class="tile"
+  [attr.id]="tile.x + ':' + tile.y"
+  [ngStyle]="{ 'background-color': tile.color }"
+  [ngClass]="{ 'tile-bordered': bordered }"
+  style="width: 100%; height: 100%"
+></div>

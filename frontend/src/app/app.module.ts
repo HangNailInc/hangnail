@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { XyzComponent } from './xyz/xyz.component';
 import { GridComponent } from './grid/grid.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
     GridComponent,
     ColorPickerComponent,
     XyzComponent,
+    TileComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

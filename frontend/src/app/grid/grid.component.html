@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title></title>
   </head>
   <body>
     <div class="grid-container">
-      <div class="tile" *ngFor="let tile of tiles" [attr.id]="'Tile(' + tile.x + ',' + tile.y + ')'" [ngStyle]="{'background-color': tile.color}"
-      (click)="onTileClicked(tile)" [ngClass]="{'tile-bordered': tile == selectedTile}">
+      <div class="row-container" *ngFor="let row of tiles2d">
+        <app-tile
+          class="tile"
+          *ngFor="let tile of row"
+          [tile]="tile"
+        ></app-tile>
       </div>
     </div>
   </body>
